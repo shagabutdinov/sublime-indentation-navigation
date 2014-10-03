@@ -115,3 +115,9 @@ indentation to define code blocks (python, cofee) :(
 | Select to end of block forward        | ctrl+shift+h      | IndentationNavigation: Select to end of block forward        |
 | Select to end of block backward       | ctrl+shift+y      | IndentationNavigation: Select to end of block backward       |
 | Select current indentation            | alt+u             | IndentationNavigation: Select current indentation            |
+
+
+### Dependencies
+
+- https://github.com/shagabutdinov/sublime-statement
+- https://github.com/shagabutdinov/sublime-expression
