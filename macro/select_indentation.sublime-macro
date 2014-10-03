@@ -1,0 +1,21 @@
+[
+  {
+    "command": "goto_indentation",
+    "args": {
+      "type": "lesser",
+      "before": 1,
+      "backward": true
+    }
+  },
+
+  {
+    "command": "goto_indentation",
+    "args": {
+      "type": "lesser",
+      "before": 1,
+      "backward": false,
+      "expand": true,
+      "alignment": "right"
+    }
+  }
+]

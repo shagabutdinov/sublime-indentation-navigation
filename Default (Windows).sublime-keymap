@@ -1,0 +1,175 @@
+[
+  {
+    "keys": ["alt+h"],
+    "command": "goto_indentation",
+    "args": {
+      "type": "lesser",
+      "before": 0
+    }
+  },
+
+  {
+    "keys": ["alt+y"],
+    "command": "goto_indentation",
+    "args": {
+      "type": "lesser",
+      "before": 0,
+      "backward": true
+    }
+  },
+
+  {
+    "keys": ["alt+shift+h"],
+    "command": "goto_indentation",
+    "args": {
+      "type": "lesser",
+      "before": 1,
+      "expand": true,
+      "alignment": "right"
+    }
+  },
+
+  {
+    "keys": ["alt+shift+y"],
+    "command": "goto_indentation",
+    "args": {
+      "type": "lesser",
+      "before": 1,
+      "backward": true,
+      "expand": true,
+      "alignment": "left"
+    }
+  },
+
+  {
+    "keys": ["alt+ctrl+h"],
+    "command": "goto_indentation",
+    "args": {
+      "type": "greater",
+      "before": 1
+    }
+  },
+
+  {
+    "keys": ["alt+ctrl+y"],
+    "command": "goto_indentation",
+    "args": {
+      "type": "greater",
+      "before": 1,
+      "backward": true
+    }
+  },
+
+  {
+    "keys": ["alt+ctrl+shift+h"],
+    "command": "goto_indentation",
+    "args": {
+      "type": "greater",
+      "before": 2,
+      "expand": true,
+      "alignment": "right"
+    }
+  },
+
+  {
+    "keys": ["alt+ctrl+shift+y"],
+    "command": "goto_indentation",
+    "args": {
+      "type": "greater",
+      "before": 2,
+      "backward": true,
+      "expand": true,
+      "alignment": "left"
+    }
+  },
+
+  {
+    "keys": ["ctrl+h"],
+    "command": "goto_indentation",
+    "args": {
+      "type": "lesser_or_equal",
+      "change": true,
+      "before": 0,
+    },
+    "context": [
+      {"key": "overlay_visible", "operator": "equal", "operand": false}
+    ]
+  },
+
+  {
+    "keys": ["ctrl+h"],
+    "command": "goto_indentation",
+    "args": {
+      "type": "lesser_or_equal",
+      "change": true,
+      "before": 1,
+    },
+    "context": [
+      // indented languages
+      {"key": "scope_b", "operator": "regex_contains", "operand": "python|coffee"},
+      {"key": "overlay_visible", "operator": "equal", "operand": false}
+    ],
+  },
+
+  {
+    "keys": ["ctrl+y"],
+    "command": "goto_indentation",
+    "args": {
+      "type": "lesser_or_equal",
+      "change": true,
+      "backward": true
+    },
+  },
+
+  {
+    "keys": ["ctrl+shift+h"],
+    "command": "goto_indentation",
+    "args": {
+      "type": "lesser_or_equal",
+      "change": true,
+      "before": 0,
+      "expand": true,
+      "alignment": "right"
+    },
+    "context": [
+      {"key": "overlay_visible", "operator": "equal", "operand": false}
+    ]
+  },
+
+  {
+    "keys": ["ctrl+shift+h"],
+    "command": "goto_indentation",
+    "args": {
+      "type": "lesser_or_equal",
+      "change": true,
+      "before": 1,
+      "expand": true,
+      "alignment": "right"
+    },
+    "context": [
+      {"key": "overlay_visible", "operator": "equal", "operand": false},
+      // indented languages
+      {"key": "scope_b", "operator": "regex_contains", "operand": "python|coffee"}
+    ],
+  },
+
+  {
+    "keys": ["ctrl+shift+y"],
+    "command": "goto_indentation",
+    "args": {
+      "type": "lesser_or_equal",
+      "change": true,
+      "backward": true,
+      "expand": true,
+      "alignment": "left"
+    }
+  },
+
+  {
+    "keys": ["alt+u"],
+    "command": "run_macro_file",
+    "args": {
+      "file": "Packages/IndentationNavigation/macro/select_indentation.sublime-macro"
+    }
+  },
+]

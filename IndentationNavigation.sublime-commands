@@ -1,0 +1,138 @@
+
+[
+  {
+    "caption": "IndentationNavigation: Goto out of block forward",
+    "command": "goto_indentation",
+    "args": {
+      "type": "lesser",
+      "before": 0
+    }
+  },
+
+  {
+    "caption": "IndentationNavigation: Goto out of block backward",
+    "command": "goto_indentation",
+    "args": {
+      "type": "lesser",
+      "before": 0,
+      "backward": true
+    }
+  },
+
+  {
+    "caption": "IndentationNavigation: Select to the end of block forward",
+    "command": "goto_indentation",
+    "args": {
+      "type": "lesser",
+      "before": 1,
+      "expand": true,
+      "alignment": "right"
+    }
+  },
+
+  {
+    "caption": "IndentationNavigation: Select to the end of block backward",
+    "command": "goto_indentation",
+    "args": {
+      "type": "lesser",
+      "before": 1,
+      "backward": true,
+      "expand": true,
+      "alignment": "left"
+    }
+  },
+
+  {
+    "caption": "IndentationNavigation: Goto block forward",
+    "command": "goto_indentation",
+    "args": {
+      "type": "greater",
+      "before": 1
+    }
+  },
+
+  {
+    "caption": "IndentationNavigation: Goto block backward",
+    "command": "goto_indentation",
+    "args": {
+      "type": "greater",
+      "before": 1,
+      "backward": true
+    }
+  },
+
+  {
+    "caption": "IndentationNavigation: Select to beginning of block forward",
+    "command": "goto_indentation",
+    "args": {
+      "type": "greater",
+      "before": 2,
+      "expand": true,
+      "alignment": "right"
+    }
+  },
+
+  {
+    "caption": "IndentationNavigation: Select to beginning of block backward",
+    "command": "goto_indentation",
+    "args": {
+      "type": "greater",
+      "before": 2,
+      "backward": true,
+      "expand": true,
+      "alignment": "left"
+    }
+  },
+
+  {
+    "caption": "IndentationNavigation: Goto end of block forward",
+    "command": "goto_indentation",
+    "args": {
+      "type": "lesser_or_equal",
+      "change": true,
+      "before": 0,
+    },
+  },
+
+  {
+    "caption": "IndentationNavigation: Goto end of block backward",
+    "command": "goto_indentation",
+    "args": {
+      "type": "lesser_or_equal",
+      "change": true,
+      "backward": true
+    },
+  },
+
+  {
+    "caption": "IndentationNavigation: Select to end of block forward",
+    "command": "goto_indentation",
+    "args": {
+      "type": "lesser_or_equal",
+      "change": true,
+      "before": 0,
+      "expand": true,
+      "alignment": "right"
+    },
+  },
+
+  {
+    "caption": "IndentationNavigation: Select to end of block backward",
+    "command": "goto_indentation",
+    "args": {
+      "type": "lesser_or_equal",
+      "change": true,
+      "backward": true,
+      "expand": true,
+      "alignment": "left"
+    }
+  },
+
+  {
+    "caption": "IndentationNavigation: Select current indentation",
+    "command": "run_macro_file",
+    "args": {
+      "file": "Packages/IndentationNavigation/macro/select_indentation.sublime-macro"
+    }
+  },
+]
