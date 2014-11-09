@@ -6,7 +6,7 @@ blocks of code.
 
 ### Demo
 
-![Demo](https://raw.github.com/shagabutdinov/sublime-indentation-navigation/master/demo/demo.gif "Demo")
+![Demo](https://github.com/shagabutdinov/sublime-enhanced-demos/raw/master/indentation_navigation.gif "Demo")
 
 
 ### Installation
@@ -119,5 +119,5 @@ indentation to define code blocks (python, cofee) :(
 
 ### Dependencies
 
-- https://github.com/shagabutdinov/sublime-statement
-- https://github.com/shagabutdinov/sublime-expression
+* [Statement](https://github.com/shagabutdinov/sublime-statement)
+* [Expression](https://github.com/shagabutdinov/sublime-expression)

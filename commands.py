@@ -2,8 +2,13 @@ import sublime
 import sublime_plugin
 import re
 
-from Statement import statement
-from Expression import expression
+try:
+  from Statement import statement
+  from Expression import expression
+except ImportError:
+  sublime.error_message("Dependency import failed; please read readme for " +
+    "IndentationNavigation plugin for installation instructions; to disable " +
+    "this message remove this plugin")
 
 class GotoIndentation(sublime_plugin.TextCommand):
   def run(self, edit, type = 'change', backward = None, before = 0,
