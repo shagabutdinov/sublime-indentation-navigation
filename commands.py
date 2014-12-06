@@ -12,7 +12,8 @@ except ImportError:
 
 class GotoIndentation(sublime_plugin.TextCommand):
   def run(self, edit, type = 'change', backward = None, before = 0,
-    alignment = 'left', expand = False, change = False, append = None):
+    alignment = 'left', expand = False, change = False, append = None,
+    use_empty_line = False, before_if_lesser = True):
 
     text = self.view.substr(sublime.Region(0, self.view.size())).split("\n")
     text.append('I') # last indented string
@@ -24,12 +25,12 @@ class GotoIndentation(sublime_plugin.TextCommand):
         position = sel.b
 
       next = self._get_next_point(text, position, type, backward, before,
-        alignment, change, append)
+        alignment, change, append, use_empty_line, before_if_lesser)
 
       while next == position and before != None and before > 0:
         before -= 1
         next = self._get_next_point(text, position, type, backward, before,
-          alignment, change, append)
+          alignment, change, append, use_empty_line, before_if_lesser)
 
       if expand:
         regions.append(sublime.Region(sel.a, next))
@@ -43,11 +44,11 @@ class GotoIndentation(sublime_plugin.TextCommand):
       self.view.show(regions[0].a)
 
   def _get_next_point(self, text, point, type, backward, before, alignment,
-    change, append):
+    change, append, use_empty_line, before_if_lesser):
 
     line, _ = self.view.rowcol(point)
     new_line = self._calculate_next_position(text, line, type, backward, before,
-      change)
+      change, use_empty_line, before_if_lesser)
 
     if append != None and new_line != None:
       next_line_region = self.view.line(self.view.text_point(new_line + 1, 0))
@@ -71,7 +72,7 @@ class GotoIndentation(sublime_plugin.TextCommand):
     return self.view.text_point(line, shift)
 
   def _calculate_next_position(self, text, line, type, backward, before,
-    change):
+    change, use_empty_line, before_if_lesser):
     search = range(line, len(text))
     if backward:
       search = range(line, -1, -1)
@@ -83,13 +84,30 @@ class GotoIndentation(sublime_plugin.TextCommand):
       if current_indentation != None:
         break
 
+
+    initial_indentation = current_indentation
     previous_lines, target_line, changed = [line], None, False
+    indentation = None
     for index, current_line in enumerate(search):
       # first line should be ignored
       if index == 0:
         continue
 
-      indentation = self._get_indentation(text[current_line])
+      use_current_empty_line = (
+        use_empty_line and
+        indentation != None and
+        self._check_indentation(
+          'equal',
+          current_indentation,
+          indentation
+        )
+      )
+
+      indentation = self._get_indentation(
+        text[current_line],
+        use_current_empty_line
+      )
+
       if indentation == None:
         continue
 
@@ -107,7 +125,19 @@ class GotoIndentation(sublime_plugin.TextCommand):
 
       previous_lines.append(current_line)
 
-    if before != None and before > 0:
+    is_before_valid = (
+      before != None and
+      before > 0 and (
+        not before_if_lesser or
+        self._check_indentation(
+          'lesser',
+          self._get_indentation(text[target_line], use_empty_line),
+          current_indentation
+        )
+      )
+    )
+
+    if is_before_valid:
       while before > len(previous_lines):
         before -= 1
       return target_line and previous_lines[-before]
@@ -131,8 +161,11 @@ class GotoIndentation(sublime_plugin.TextCommand):
 
     return statement.is_arguments(self.view, point)
 
-  def _get_indentation(self, line):
+  def _get_indentation(self, line, use_empty_line = False):
     match = re.search(r'^(\s*)\S', line)
+    if match == None and use_empty_line:
+      return ''
+
     return match and match.group(1)
 
   def _check_indentation(self, type, indentation1, indentation2):
@@ -146,7 +179,7 @@ class GotoIndentation(sublime_plugin.TextCommand):
       return len(indentation1) < len(indentation2)
 
     if type == 'lesser_or_equal':
-      return indentation1 <= indentation2
+      return len(indentation1) <= len(indentation2)
 
     if type == 'greater':
       return len(indentation1) > len(indentation2)

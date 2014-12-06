@@ -153,7 +153,9 @@
     "args": {
       "type": "lesser_or_equal",
       "change": true,
-      "before": 0,
+      "use_empty_line": true,
+      "before": 1,
+      "before_if_lesser": true,
       "expand": true,
       "alignment": "right"
     },
@@ -186,8 +188,11 @@
     "command": "goto_indentation",
     "args": {
       "type": "lesser_or_equal",
-      "change": true,
       "backward": true,
+      "change": true,
+      "use_empty_line": true,
+      "before": 1,
+      "before_if_lesser": true,
       "expand": true,
       "alignment": "left"
     },
