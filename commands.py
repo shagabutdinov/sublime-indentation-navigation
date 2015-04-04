@@ -41,7 +41,7 @@ class GotoIndentation(sublime_plugin.TextCommand):
     self.view.sel().add_all(regions)
 
     if len(regions) > 0:
-      self.view.show(regions[0].a)
+      self.view.show(regions[0].b)
 
   def _get_next_point(self, text, point, type, backward, before, alignment,
     change, append, use_empty_line, before_if_lesser):
