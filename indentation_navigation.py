@@ -68,7 +68,6 @@ def _calculate_next_position(view, text, line, type, backward, before,
     if current_indentation != None:
       break
 
-
   initial_indentation = current_indentation
   previous_lines, target_line, changed = [line], None, False
   indentation = None
@@ -87,11 +86,7 @@ def _calculate_next_position(view, text, line, type, backward, before,
       )
     )
 
-    indentation = _get_indentation(
-      text[current_line],
-      use_current_empty_line
-    )
-
+    indentation = _get_indentation(text[current_line], use_current_empty_line)
     if indentation == None:
       continue
 
@@ -100,14 +95,19 @@ def _calculate_next_position(view, text, line, type, backward, before,
         continue
       changed = True
 
-    target_line_found = (_check_indentation(type, indentation,
-      current_indentation) and (not change or changed))
+    target_line_found = (
+      _check_indentation(type, indentation, current_indentation) and
+      (not change or changed)
+    )
 
     if target_line_found:
       target_line = current_line
       break
 
     previous_lines.append(current_line)
+
+  if target_line == None:
+    return None
 
   is_before_valid = (
     before != None and
@@ -160,7 +160,11 @@ def _check_indentation(type, indentation1, indentation2):
     return indentation1 != indentation2
 
   if type == 'lesser':
-    return len(indentation1) < len(indentation2)
+    return (
+      len(indentation1) < len(indentation2) or (
+        indentation1 == '' and len(indentation1) == len(indentation2)
+      )
+    )
 
   if type == 'lesser_or_equal':
     return len(indentation1) <= len(indentation2)

@@ -1,7 +1,7 @@
 import sublime
 import sublime_plugin
 
-from . import utility
+from . import indentation_navigation
 
 class GotoIndentation(sublime_plugin.TextCommand):
   def run(self, edit, type = 'change', backward = None, before = 0,
@@ -14,8 +14,9 @@ class GotoIndentation(sublime_plugin.TextCommand):
       if expand:
         position = sel.b
 
-      next = utility.get_point(self.view, position, type, backward, before,
-        alignment, change, append, use_empty_line, before_if_lesser)
+      next = indentation_navigation.get_point(self.view, position, type,
+        backward, before, alignment, change, append, use_empty_line,
+        before_if_lesser)
 
       if expand:
         regions.append(sublime.Region(sel.a, next))
