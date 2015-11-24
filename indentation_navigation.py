@@ -4,10 +4,11 @@ import re
 try:
   from Statement import statement
   from Expression import expression
-except ImportError:
+except ImportError as error:
   sublime.error_message("Dependency import failed; please read readme for " +
     "IndentationNavigation plugin for installation instructions; to disable " +
-    "this message remove this plugin")
+    "this message remove this plugin; message: " + str(error))
+  raise error
 
 def get_point(view, position, type = 'change', backward = None,
   before = 0, alignment = 'left', change = False,
