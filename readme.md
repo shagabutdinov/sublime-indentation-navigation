@@ -1,6 +1,6 @@
 # Sublime IndentationNavigation plugin
 
-This is glorious plugin that allow to navigate through text usign indentation of
+This is glorious plugin that allow to navigate through text using indentation of
 lines. It reduce count of typing drastically when managing or navigating through
 blocks of code.
 
